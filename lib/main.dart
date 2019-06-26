@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget
         primarySwatch: Colors.blue,
         brightness: Brightness.dark,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'When should I go to bed'),
     );
   }
 }
@@ -34,6 +34,8 @@ class MyHomePage extends StatefulWidget
 class _MyHomePageState extends State<MyHomePage> 
 {
   int _genderValue;
+  double sleepTime;
+  final TextEditingController ageInputController = new TextEditingController();
 
   void _genderInputChanged(int value)
   {
@@ -90,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage>
                       icon: Icon(Icons.hourglass_empty),
                       hintText: 'Enter your age here'
                     ),
+                    controller: ageInputController,
                     keyboardType: TextInputType.number,
                   )
                 ),
@@ -142,11 +145,65 @@ class _MyHomePageState extends State<MyHomePage>
           child: Text("How long should I sleep?"),
           onPressed: ()
           {
-
+            _calculateSleepTime(context, sleepTime, ageInputController);
           },
           color: Colors.teal,
         )
       ],
     );
   }
+}
+
+void _calculateSleepTime(context, sleepTime, age)
+{
+  if (age <= 1)
+  {
+    sleepTime = 15;
+  }
+  else if (age <= 2)
+  {
+    sleepTime = 14;
+  }
+  else if (age <= 5)
+  {
+    sleepTime = 12;
+  }
+  else if (age <= 13)
+  {
+    sleepTime = 10;
+  }
+  else if (age <= 17)
+  {
+    sleepTime = 9;
+  }
+  else if (age <= 64)
+  {
+    sleepTime = 8;
+  }
+  else
+  {
+    sleepTime = 7;
+  }
+
+  showModalBottomSheet
+  (
+    context: context,
+    builder: (BuildContext bc)
+    {
+      return Container
+      (
+        child: new Wrap
+        (
+          children: <Widget>
+          [
+            new ListTile
+            (
+              leading: new Icon(Icons.hourglass_full),
+              title: new Text("You should sleep "+ sleepTime.toString() +" hours"),
+            )
+          ],
+        ),
+      );
+    }
+  );
 }
