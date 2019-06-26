@@ -40,7 +40,15 @@ class _MyHomePageState extends State<MyHomePage>
     setState(() 
     {
       _genderValue = value;
+    });
+  }
 
+  
+  setGender(int value)
+  {
+    setState(() 
+    {
+      _genderValue = value;
     });
   }
 
@@ -99,58 +107,44 @@ class _MyHomePageState extends State<MyHomePage>
               mainAxisSize: MainAxisSize.min,
               children: <Widget>
               [
-                ButtonBar
+                const ListTile
                 (
-                  alignment: MainAxisAlignment.center,
-                  children: <Widget>
-                  [
-                    Expanded
-                    (
-                      flex: 1,
-                      child: RadioListTile
-                      (
-                        value: 0,
-                        groupValue: _genderValue,
-                        title: Text("Male"),
-                        onChanged: (value) 
-                        {
-                          _genderInputChanged(value);
-                        }
-                      ),
-                    ),
-                    Expanded
-                    (
-                      flex: 1,
-                      child: RadioListTile
-                      (
-                        value: 0,
-                        groupValue: _genderValue,
-                        title: Text("Male"),
-                        onChanged: (value) 
-                        {
-                          _genderInputChanged(value);
-                        }
-                      ),
-                    ),
-                    Expanded
-                    (
-                      flex: 1,
-                      child: RadioListTile
-                      (
-                        value: 0,
-                        groupValue: _genderValue,
-                        title: Text("Male"),
-                        onChanged: (value) 
-                        {
-                          _genderInputChanged(value);
-                        }
-                      ),
-                    ),
-                  ],
+                title: Text("What's your gender?"),
+                ),
+                new RadioListTile
+                (
+                  value: 0,
+                  groupValue: _genderValue,
+                  title: Text("Male"),
+                  onChanged: (value){_genderInputChanged(value);}
+                ),
+                new RadioListTile
+                (
+                  value: 1,
+                  groupValue: _genderValue,
+                  title: Text("Female"),
+                  onChanged: (value){_genderInputChanged(value);}
+                ),
+                new RadioListTile
+                (
+                  value: 2,
+                  groupValue: _genderValue,
+                  title: Text("Other"),
+                  onChanged: (value){_genderInputChanged(value);}
                 )
               ],
             ),
           ),
+        ),
+        Divider(),
+        RaisedButton
+        (
+          child: Text("How long should I sleep?"),
+          onPressed: ()
+          {
+
+          },
+          color: Colors.teal,
         )
       ],
     );
