@@ -1,5 +1,8 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/time_picker_formfield.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,8 +37,8 @@ class MyHomePage extends StatefulWidget
 class _MyHomePageState extends State<MyHomePage> 
 {
   int _genderValue;
-  double sleepTime;
   final TextEditingController ageInputController = new TextEditingController();
+  final TextEditingController timeInputController = new TextEditingController();
 
   void _genderInputChanged(int value)
   {
@@ -140,12 +143,42 @@ class _MyHomePageState extends State<MyHomePage>
           ),
         ),
         Divider(),
+        Container
+        (
+          child: Card
+          (
+            child: Column
+            (
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>
+              [
+                const ListTile
+                (
+                  title: Text("When do you want to get up?"),
+                ),
+                new DateTimePickerFormField
+                (
+                  inputType: InputType.time,
+                  format: DateFormat("HH:mm"),
+                  initialTime: TimeOfDay.now(),
+                  decoration: InputDecoration
+                  (
+                    labelText: "Enter time here",
+                    hasFloatingPlaceholder: false,
+                  ),
+                  controller: timeInputController,
+                )
+              ],
+            ),
+          ),
+        ),
+        Divider(),
         RaisedButton
         (
           child: Text("How long should I sleep?"),
           onPressed: ()
           {
-            _calculateSleepTime(context, sleepTime, ageInputController);
+            _calculateSleepTime(context, _genderValue, ageInputController, timeInputController);
           },
           color: Colors.teal,
         )
@@ -154,8 +187,11 @@ class _MyHomePageState extends State<MyHomePage>
   }
 }
 
-void _calculateSleepTime(context, sleepTime, age)
+void _calculateSleepTime(context, int genderValue, ageController, timeController)
 {
+  double sleepTime;
+  double age = double.parse(ageController.text);
+  //double wakeTime = double.parse(timeController.text);
   if (age <= 1)
   {
     sleepTime = 15;
@@ -185,6 +221,11 @@ void _calculateSleepTime(context, sleepTime, age)
     sleepTime = 7;
   }
 
+  if (genderValue == 1)
+  {
+    sleepTime += 1;
+  }
+
   showModalBottomSheet
   (
     context: context,
@@ -199,8 +240,8 @@ void _calculateSleepTime(context, sleepTime, age)
             new ListTile
             (
               leading: new Icon(Icons.hourglass_full),
-              title: new Text("You should sleep "+ sleepTime.toString() +" hours"),
-            )
+              title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
+            ),
           ],
         ),
       );
