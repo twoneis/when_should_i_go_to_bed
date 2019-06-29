@@ -2,7 +2,6 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/time_picker_formfield.dart';
 
 void main() => runApp(MyApp());
 
@@ -231,19 +230,17 @@ void _calculateSleepTime(context, int genderValue, ageController, timeController
     context: context,
     builder: (BuildContext bc)
     {
-      return Container
+      return new Column
       (
-        child: new Wrap
-        (
-          children: <Widget>
-          [
-            new ListTile
-            (
-              leading: new Icon(Icons.hourglass_full),
-              title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
-            ),
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>
+        [
+          new ListTile
+          (
+            leading: new Icon(Icons.hourglass_full),
+            title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
+          ),
+        ],
       );
     }
   );
