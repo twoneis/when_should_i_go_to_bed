@@ -1,6 +1,6 @@
 # when_should_i_go_to_bed
 
-A app which tells you, when you should go to bed.
+An app which tells you, when you should go to bed.
 
 ## Getting Started
 
