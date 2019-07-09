@@ -2,6 +2,8 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -180,6 +182,77 @@ class _MyHomePageState extends State<MyHomePage>
             _calculateSleepTime(context, _genderValue, ageInputController, timeInputController);
           },
           color: Colors.teal,
+        ),
+        Divider(),
+        FlatButton
+        (
+          child: Text("View Sources"),
+          onPressed: () 
+          {
+            showDialog
+            (
+              context: context,
+              child: ListView
+              (
+                padding: const EdgeInsets.all(20.0),
+                children: <Widget>
+                [
+                  Card
+                  (
+                    child: Column
+                    (
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>
+                      [
+                        ButtonTheme.bar
+                        (
+                          child: ButtonBar
+                          (
+                            children: <Widget>
+                            [
+                              CloseButton()
+                            ],
+                          ),
+                        ),
+                        ListTile
+                        (
+                          title: Linkify
+                          (
+                            text: "How much sleep do you need at which age? https://www.sleepfoundation.org/excessive-sleepiness/support/how-much-sleep-do-we-really-need",
+                            onOpen: (url) async
+                            {
+                              if (await canLaunch(url))
+                              {
+                                await launch(url);
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile
+                        (
+                          title:Linkify
+                          (
+                            text: "Do Women need more sleep than men? https://www.sleepfoundation.org/articles/do-women-need-more-sleep-men",
+                            onOpen: (url) async
+                            {
+                              if (await canLaunch(url))
+                              {
+                                await launch(url);
+                              }
+                            },
+                          )
+                        ),
+                        ListTile
+                        (
+                          title: Text("All datas are only based on my resarch and are average value. I'm just a normal guy trying to help others to sleep enough. If you need exact datas on how long you need to sleep, you may consider asking a doctor. Again, this data will not apply to anyone and are just average values."),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              )
+            );
+          },
         )
       ],
     );
