@@ -17,10 +17,13 @@ class MyApp extends StatelessWidget
       title: 'Flutter Demo',
       theme: ThemeData
       (
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark,
+        textSelectionColor: Colors.redAccent[100],
+        primaryColor: Colors.red[100],
+        primarySwatch: Colors.red,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.white,
       ),
-      home: MyHomePage(title: 'When should I go to bed'),
+      home: MyHomePage(title: 'BedTime'),
     );
   }
 }
@@ -68,202 +71,204 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) 
   {
-    return ListView
+    return new Scaffold
     (
-      padding: const EdgeInsets.all(20.0),
-      children: <Widget>
-      [
-        Divider(),
-        Container
-        (
-          child: Card
+      body: ListView
+      (
+        padding: const EdgeInsets.all(20.0),
+        children: <Widget>
+        [
+          Divider(),
+          Container
           (
-            child: Column
+            child: Card
             (
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>
-              [
-                const ListTile
-                (
-                  title: Text('How old are you?'),
-                ),
-                ButtonTheme.bar
-                (
-                  child: TextFormField
-                  (
-                    decoration: const InputDecoration
-                    (
-                      icon: Icon(Icons.hourglass_empty),
-                      hintText: 'Enter your age here'
-                    ),
-                    controller: ageInputController,
-                    keyboardType: TextInputType.number,
-                  )
-                ),
-              ],
-            ),
-          ),
-        ),
-        Divider(),
-        Container
-        (
-          child: Card
-          (
-            child: Column
-            (
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>
-              [
-                const ListTile
-                (
-                title: Text("What's your gender?"),
-                ),
-                new RadioListTile
-                (
-                  value: 0,
-                  groupValue: _genderValue,
-                  title: Text("Male"),
-                  onChanged: (value){_genderInputChanged(value);}
-                ),
-                new RadioListTile
-                (
-                  value: 1,
-                  groupValue: _genderValue,
-                  title: Text("Female"),
-                  onChanged: (value){_genderInputChanged(value);}
-                ),
-                new RadioListTile
-                (
-                  value: 2,
-                  groupValue: _genderValue,
-                  title: Text("Other"),
-                  onChanged: (value){_genderInputChanged(value);}
-                )
-              ],
-            ),
-          ),
-        ),
-        Divider(),
-        Container
-        (
-          child: Card
-          (
-            child: Column
-            (
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>
-              [
-                const ListTile
-                (
-                  title: Text("When do you want to get up?"),
-                ),
-                new DateTimePickerFormField
-                (
-                  inputType: InputType.time,
-                  format: DateFormat("HH:mm"),
-                  initialTime: TimeOfDay.now(),
-                  decoration: InputDecoration
-                  (
-                    labelText: "Enter time here",
-                    hasFloatingPlaceholder: false,
-                  ),
-                  controller: timeInputController,
-                )
-              ],
-            ),
-          ),
-        ),
-        Divider(),
-        RaisedButton
-        (
-          child: Text("How long should I sleep?"),
-          onPressed: ()
-          {
-            _calculateSleepTime(context, _genderValue, ageInputController, timeInputController);
-          },
-          color: Colors.teal,
-        ),
-        Divider(),
-        FlatButton
-        (
-          child: Text("View Sources"),
-          onPressed: () 
-          {
-            showDialog
-            (
-              context: context,
-              child: ListView
+              child: Column
               (
-                padding: const EdgeInsets.all(20.0),
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>
                 [
-                  Card
+                  const ListTile
                   (
-                    child: Column
+                    title: Text('How old are you?'),
+                  ),
+                  ButtonTheme.bar
+                  (
+                    child: TextFormField
                     (
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>
-                      [
-                        ButtonTheme.bar
-                        (
-                          child: ButtonBar
-                          (
-                            children: <Widget>
-                            [
-                              CloseButton()
-                            ],
-                          ),
-                        ),
-                        ListTile
-                        (
-                          title: Linkify
-                          (
-                            text: "How much sleep do you need at which age? https://www.sleepfoundation.org/excessive-sleepiness/support/how-much-sleep-do-we-really-need",
-                            onOpen: (url) async
-                            {
-                              if (await canLaunch(url))
-                              {
-                                await launch(url);
-                              }
-                            },
-                          ),
-                        ),
-                        ListTile
-                        (
-                          title:Linkify
-                          (
-                            text: "Do Women need more sleep than men? https://www.sleepfoundation.org/articles/do-women-need-more-sleep-men",
-                            onOpen: (url) async
-                            {
-                              if (await canLaunch(url))
-                              {
-                                await launch(url);
-                              }
-                            },
-                          )
-                        ),
-                        ListTile
-                        (
-                          title: Text("All datas are only based on my resarch and are average value. I'm just a normal guy trying to help others to sleep enough. If you need exact datas on how long you need to sleep, you may consider asking a doctor. Again, this data will not apply to anyone and are just average values."),
-                        )
-                      ],
-                    ),
+                      decoration: const InputDecoration
+                      (
+                        icon: Icon(Icons.hourglass_empty),
+                        hintText: 'Enter your age here'
+                      ),
+                      controller: ageInputController,
+                      keyboardType: TextInputType.number,
+                    )
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Divider(),
+          Container
+          (
+            child: Card
+            (
+              child: Column
+              (
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>
+                [
+                  const ListTile
+                  (
+                  title: Text("What's your gender?"),
+                  ),
+                  new RadioListTile
+                  (
+                    value: 0,
+                    groupValue: _genderValue,
+                    title: Text("Male"),
+                    onChanged: (value){_genderInputChanged(value);}
+                  ),
+                  new RadioListTile
+                  (
+                    value: 1,
+                    groupValue: _genderValue,
+                    title: Text("Female"),
+                    onChanged: (value){_genderInputChanged(value);}
+                  ),
+                  new RadioListTile
+                  (
+                    value: 2,
+                    groupValue: _genderValue,
+                    title: Text("Other"),
+                    onChanged: (value){_genderInputChanged(value);}
                   )
                 ],
-              )
-            );
-          },
-        )
-      ],
+              ),
+            ),
+          ),
+          Divider(),
+          Container
+          (
+            child: Card
+            (
+              child: Column
+              (
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>
+                [
+                  ListTile
+                  (
+                    title: Text("When do you want to get up?"),
+                  ),
+                  new DateTimePickerFormField
+                  (
+                    inputType: InputType.time,
+                    format: DateFormat("HH:mm"),
+                    initialTime: TimeOfDay.now(),
+                    decoration: InputDecoration
+                    (
+                      labelText: "Enter time here",
+                      hasFloatingPlaceholder: false,
+                    ),
+                    controller: timeInputController,
+                  )
+                ],
+              ),
+            ),
+          ),
+          RaisedButton
+          (
+            child: Text("How long should I sleep?"),
+            onPressed: ()
+            {
+              _calculateSleepTime(context, _genderValue, ageInputController, timeInputController);
+            },
+            color: Theme.of(context).primaryColor,
+          ),
+          Divider(),
+          FlatButton
+          (
+            child: Text("View Sources"),
+            onPressed: () 
+            {
+              showDialog
+              (
+                context: context,
+                child: ListView
+                (
+                  padding: const EdgeInsets.all(20.0),
+                  children: <Widget>
+                  [
+                    Card
+                    (
+                      child: Column
+                      (
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>
+                        [
+                          ButtonTheme.bar
+                          (
+                            child: ButtonBar
+                            (
+                              children: <Widget>
+                              [
+                                CloseButton()
+                              ],
+                            ),
+                          ),
+                          ListTile
+                          (
+                            title: Linkify
+                            (
+                              text: "How much sleep do you need at which age? https://www.sleepfoundation.org/excessive-sleepiness/support/how-much-sleep-do-we-really-need",
+                              onOpen: (url) async
+                              {
+                                if (await canLaunch(url))
+                                {
+                                  await launch(url);
+                                }
+                              },
+                            ),
+                          ),
+                          ListTile
+                          (
+                            title:Linkify
+                            (
+                              text: "Do Women need more sleep than men? https://www.sleepfoundation.org/articles/do-women-need-more-sleep-men",
+                              onOpen: (url) async
+                              {
+                                if (await canLaunch(url))
+                                {
+                                  await launch(url);
+                                }
+                              },
+                            )
+                          ),
+                          ListTile
+                          (
+                            title: Text("All datas are only based on my resarch and are average value. I'm just a normal guy trying to help others to sleep enough. If you need exact datas on how long you need to sleep, you may consider asking a doctor. Again, this data will not apply to anyone and are just average values."),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              );
+            },
+          )
+        ],
+      )
     );
+    
   }
 }
 
 void _calculateSleepTime(context, int genderValue, ageController, timeController)
 {
-  double sleepTime;
-  double age = double.parse(ageController.text);
-  //double wakeTime = double.parse(timeController.text);
+  int sleepTime;
+  int age = int.parse(ageController.text);
   if (age <= 1)
   {
     sleepTime = 15;
@@ -297,6 +302,17 @@ void _calculateSleepTime(context, int genderValue, ageController, timeController
   {
     sleepTime += 1;
   }
+  
+    List<String> wakeTime = timeController.text.split(":");
+    int wakeHours = int.parse(wakeTime[0]);
+    int minutes = int.parse(wakeTime[1]);
+    int day = 24;
+    int hours = wakeHours - sleepTime;
+
+    if (hours < 0)
+    {
+      hours = day += hours;
+    }
 
   showModalBottomSheet
   (
@@ -312,6 +328,11 @@ void _calculateSleepTime(context, int genderValue, ageController, timeController
           (
             leading: new Icon(Icons.hourglass_full),
             title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
+          ),
+          new ListTile
+          (
+            leading: new Icon(Icons.alarm),
+            title: new Text("You should go to bed at " + hours.toString() + ":" + minutes.toString()),
           ),
         ],
       );
