@@ -1,11 +1,13 @@
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/rendering.dart';
+
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:when_should_i_go_to_bed/appBar.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
+import 'package:when_should_i_go_to_bed/appBar.dart';
 import 'settings.dart';
 
 void main() => runApp(MyApp());
@@ -15,18 +17,23 @@ class MyApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp
-    (
-      title: 'Flutter Demo',
-      theme: ThemeData
+     return new DynamicTheme
+     (
+      defaultBrightness: Brightness.light,
+      data: (brightness) => new ThemeData
       (
-        textSelectionColor: Colors.redAccent[100],
-        primaryColor: Colors.red[100],
-        primarySwatch: Colors.red,
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.white,
+        primarySwatch: Colors.pink,
+        brightness: brightness,
       ),
-      home: MyHomePage(title: 'BedTime'),
+      themedWidgetBuilder: (context, theme) 
+      {
+        return new MaterialApp
+        (
+          title: 'Flutter Demo',
+          theme: theme,
+          home: new MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }
     );
   }
 }
