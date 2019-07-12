@@ -4,6 +4,9 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:when_should_i_go_to_bed/appBar.dart';
+
+import 'settings.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,9 +43,12 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage> 
 {
+  //declaring some later needed values
   int _genderValue;
   final TextEditingController ageInputController = new TextEditingController();
   final TextEditingController timeInputController = new TextEditingController();
+
+  //functions
 
   void _genderInputChanged(int value)
   {
@@ -68,115 +74,117 @@ class _MyHomePageState extends State<MyHomePage>
     _genderValue = 0;
   }
 
+
+  //static UI
   @override
   Widget build(BuildContext context) 
   {
     return new Scaffold
     (
+      appBar: TopBar
+      (
+        title: "Bed Time",
+        child: Icon(Icons.settings),
+        onPressed: ()
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
+        },
+      ),
       body: ListView
       (
         padding: const EdgeInsets.all(20.0),
         children: <Widget>
         [
-          Divider(),
-          Container
+          Card
           (
-            child: Card
+            child: Column
             (
-              child: Column
-              (
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>
-                [
-                  const ListTile
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>
+              [
+                const ListTile
+                (
+                  title: Text('How old are you?'),
+                ),
+                ButtonTheme.bar
+                (
+                  child: TextFormField
                   (
-                    title: Text('How old are you?'),
-                  ),
-                  ButtonTheme.bar
-                  (
-                    child: TextFormField
+                    decoration: const InputDecoration
                     (
-                      decoration: const InputDecoration
-                      (
-                        icon: Icon(Icons.hourglass_empty),
-                        hintText: 'Enter your age here'
-                      ),
-                      controller: ageInputController,
-                      keyboardType: TextInputType.number,
-                    )
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Divider(),
-          Container
-          (
-            child: Card
-            (
-              child: Column
-              (
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>
-                [
-                  const ListTile
-                  (
-                  title: Text("What's your gender?"),
-                  ),
-                  new RadioListTile
-                  (
-                    value: 0,
-                    groupValue: _genderValue,
-                    title: Text("Male"),
-                    onChanged: (value){_genderInputChanged(value);}
-                  ),
-                  new RadioListTile
-                  (
-                    value: 1,
-                    groupValue: _genderValue,
-                    title: Text("Female"),
-                    onChanged: (value){_genderInputChanged(value);}
-                  ),
-                  new RadioListTile
-                  (
-                    value: 2,
-                    groupValue: _genderValue,
-                    title: Text("Other"),
-                    onChanged: (value){_genderInputChanged(value);}
-                  )
-                ],
-              ),
-            ),
-          ),
-          Divider(),
-          Container
-          (
-            child: Card
-            (
-              child: Column
-              (
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>
-                [
-                  ListTile
-                  (
-                    title: Text("When do you want to get up?"),
-                  ),
-                  new DateTimePickerFormField
-                  (
-                    inputType: InputType.time,
-                    format: DateFormat("HH:mm"),
-                    initialTime: TimeOfDay.now(),
-                    decoration: InputDecoration
-                    (
-                      labelText: "Enter time here",
-                      hasFloatingPlaceholder: false,
+                      icon: Icon(Icons.hourglass_empty),
+                      hintText: 'Enter your age here'
                     ),
-                    controller: timeInputController,
+                    controller: ageInputController,
+                    keyboardType: TextInputType.number,
                   )
-                ],
-              ),
+                ),
+              ],
             ),
+            elevation: 5,
+          ),
+        Card
+          (
+            child: Column
+            (
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>
+              [
+                const ListTile
+                (
+                title: Text("What's your gender?"),
+                ),
+                new RadioListTile
+                (
+                  value: 0,
+                  groupValue: _genderValue,
+                  title: Text("Male"),
+                  onChanged: (value){_genderInputChanged(value);}
+                ),
+                new RadioListTile
+                (
+                  value: 1,
+                  groupValue: _genderValue,
+                  title: Text("Female"),
+                  onChanged: (value){_genderInputChanged(value);}
+                ),
+                new RadioListTile
+                (
+                  value: 2,
+                  groupValue: _genderValue,
+                  title: Text("Other"),
+                  onChanged: (value){_genderInputChanged(value);}
+                )
+              ],
+            ),
+            elevation: 5,
+          ),
+          Card
+          (
+            child: Column
+            (
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>
+              [
+                ListTile
+                (
+                  title: Text("When do you want to get up?"),
+                ),
+                new DateTimePickerFormField
+                (
+                  inputType: InputType.time,
+                  format: DateFormat("HH:mm"),
+                  initialTime: TimeOfDay.now(),
+                  decoration: InputDecoration
+                  (
+                    labelText: "Enter time here",
+                    hasFloatingPlaceholder: false,
+                  ),
+                  controller: timeInputController,
+                )
+              ],
+            ),
+            elevation: 5,
           ),
           RaisedButton
           (
@@ -186,6 +194,7 @@ class _MyHomePageState extends State<MyHomePage>
               _calculateSleepTime(context, _genderValue, ageInputController, timeInputController);
             },
             color: Theme.of(context).primaryColor,
+            elevation: 5,
           ),
           Divider(),
           FlatButton
@@ -261,81 +270,88 @@ class _MyHomePageState extends State<MyHomePage>
         ],
       )
     );
+  }
+
+  void _calculateSleepTime(context, int genderValue, ageController, timeController)
+  {
+    int sleepTime;
+    int age = int.parse(ageController.text);
+    if (age <= 1)
+    {
+      sleepTime = 15;
+    }
+    else if (age <= 2)
+    {
+      sleepTime = 14;
+    }
+    else if (age <= 5)
+    {
+      sleepTime = 12;
+    }
+    else if (age <= 13)
+    {
+      sleepTime = 10;
+    }
+    else if (age <= 17)
+    {
+      sleepTime = 9;
+    }
+    else if (age <= 64)
+    {
+      sleepTime = 8;
+    }
+    else
+    {
+      sleepTime = 7;
+    }
+
+    if (genderValue == 1)
+    {
+      sleepTime += 1;
+    }
     
-  }
-}
-
-void _calculateSleepTime(context, int genderValue, ageController, timeController)
-{
-  int sleepTime;
-  int age = int.parse(ageController.text);
-  if (age <= 1)
-  {
-    sleepTime = 15;
-  }
-  else if (age <= 2)
-  {
-    sleepTime = 14;
-  }
-  else if (age <= 5)
-  {
-    sleepTime = 12;
-  }
-  else if (age <= 13)
-  {
-    sleepTime = 10;
-  }
-  else if (age <= 17)
-  {
-    sleepTime = 9;
-  }
-  else if (age <= 64)
-  {
-    sleepTime = 8;
-  }
-  else
-  {
-    sleepTime = 7;
-  }
-
-  if (genderValue == 1)
-  {
-    sleepTime += 1;
-  }
-  
     List<String> wakeTime = timeController.text.split(":");
     int wakeHours = int.parse(wakeTime[0]);
     int minutes = int.parse(wakeTime[1]);
-    int day = 24;
+    int dayhours = 24;
     int hours = wakeHours - sleepTime;
 
     if (hours < 0)
     {
-      hours = day += hours;
+      hours = dayhours += hours;
     }
 
-  showModalBottomSheet
-  (
-    context: context,
-    builder: (BuildContext bc)
-    {
-      return new Column
-      (
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>
-        [
-          new ListTile
-          (
-            leading: new Icon(Icons.hourglass_full),
-            title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
-          ),
-          new ListTile
-          (
-            leading: new Icon(Icons.alarm),
-            title: new Text("You should go to bed at " + hours.toString() + ":" + minutes.toString()),
-          ),
-        ],
-      );
-    }
-  );
+    showModalBottomSheet
+    (
+      context: context,
+      builder: (BuildContext bc)
+      {
+        return new Column
+        (
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>
+          [
+            new ListTile
+            (
+              leading: new Icon(Icons.hourglass_full),
+              title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
+            ),
+            new ListTile
+            (
+              leading: new Icon(Icons.alarm),
+              title: new Text("You should go to bed at " + hours.toString() + ":" + minutes.toString()),
+              trailing: FlatButton
+              (
+                child: Icon(Icons.add_alarm),
+                onPressed: ()
+                {
+                  
+                },
+              ),
+            ),
+          ],
+        );
+      }
+    );
+  }
 }
