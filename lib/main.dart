@@ -322,7 +322,6 @@ class _MyHomePageState extends State<MyHomePage>
     int minutes = int.parse(wakeTime[1]);
     int dayhours = 24;
     int hours = wakeHours - sleepTime;
-
     if (hours < 0)
     {
       hours = dayhours += hours;
