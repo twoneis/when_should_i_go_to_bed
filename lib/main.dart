@@ -101,17 +101,14 @@ class _MyHomePageState extends State<MyHomePage>
       bottomNavigationBar: AwesomeBottomNavigationBar
       (
         icons: [
-          Icons.add,
-          Icons.delete,
-          Icons.power,
-          Icons.menu,
-          Icons.settings,
+          Icons.brightness_3,
+          Icons.hotel,
+          Icons.wb_sunny,
         ],
-        tapCallback: ()
-        {
-
+            tapCallback: (int index) {
+          
         },
-      ),
+          ),
       body: ListView
       (
         padding: const EdgeInsets.all(20.0),
