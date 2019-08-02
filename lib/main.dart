@@ -295,6 +295,7 @@ class _MyHomePageState extends State<MyHomePage>
                 },
               ),
             ),
+            new Text("This app can not replace a medical advice.")
           ],
         );
       }
