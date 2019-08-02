@@ -6,8 +6,9 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:when_should_i_go_to_bed/AwesomeBottomNav/AwesomeBottomNavigationBar.dart';
  
-import 'package:when_should_i_go_to_bed/appBar.dart';
+import 'appbar.dart';
 import 'settings.dart';
 
 void main() => runApp(MyApp());
@@ -95,6 +96,20 @@ class _MyHomePageState extends State<MyHomePage>
         onPressed: ()
         {
           Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
+        },
+      ),
+      bottomNavigationBar: AwesomeBottomNavigationBar
+      (
+        icons: [
+          Icons.add,
+          Icons.delete,
+          Icons.power,
+          Icons.menu,
+          Icons.settings,
+        ],
+        tapCallback: ()
+        {
+
         },
       ),
       body: ListView
