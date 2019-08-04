@@ -114,6 +114,10 @@ class _MyHomePageState extends State<MyHomePage>
         [
           Card
           (
+            shape: RoundedRectangleBorder
+            (
+                borderRadius: BorderRadius.circular(10.0),
+            ),
             child: Column
             (
               mainAxisSize: MainAxisSize.min,
@@ -140,8 +144,12 @@ class _MyHomePageState extends State<MyHomePage>
             ),
             elevation: 5,
           ),
-        Card
+          Card
           (
+            shape: RoundedRectangleBorder
+            (
+                borderRadius: BorderRadius.circular(10.0),
+            ),
             child: Column
             (
               mainAxisSize: MainAxisSize.min,
@@ -178,6 +186,10 @@ class _MyHomePageState extends State<MyHomePage>
           ),
           Card
           (
+            shape: RoundedRectangleBorder
+            (
+                borderRadius: BorderRadius.circular(10.0),
+            ),
             child: Column
             (
               mainAxisSize: MainAxisSize.min,
@@ -205,6 +217,10 @@ class _MyHomePageState extends State<MyHomePage>
           ),
           RaisedButton
           (
+            shape: RoundedRectangleBorder
+            (
+                borderRadius: BorderRadius.circular(10.0),
+            ),
             child: Text("How long should I sleep?"),
             onPressed: ()
             {
@@ -272,33 +288,49 @@ class _MyHomePageState extends State<MyHomePage>
       context: context,
       builder: (BuildContext bc)
       {
-        return new Column
+        return new Container
         (
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>
-          [
-            new ListTile
+          color: Color(0xFF737373),
+          child: new Container
+          (
+            decoration: new BoxDecoration
             (
-              leading: new Icon(Icons.hourglass_full),
-              title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
-            ),
-            new ListTile
-            (
-              leading: new Icon(Icons.alarm),
-              title: new Text("You should go to bed at " + hours.toString() + ":" + minutes.toString()),
-              trailing: FlatButton
+              color: Colors.white,
+              borderRadius: new BorderRadius.only
               (
-                child: Icon(Icons.add_alarm),
-                onPressed: ()
-                {
-                  
-                },
-              ),
+                topLeft: const Radius.circular(10.0),
+                topRight: const Radius.circular(10.0)
+              )
             ),
-            new Text("This app can not replace a medical advice.")
-          ],
+            child: new Column
+            (
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>
+              [
+                new ListTile
+                (
+                  leading: new Icon(Icons.hourglass_full),
+                  title: new Text("You should sleep "+ sleepTime.toInt().toString() +" hours"),
+                ),
+                new ListTile
+                (
+                  leading: new Icon(Icons.alarm),
+                  title: new Text("You should go to bed at " + hours.toString() + ":" + minutes.toString()),
+                  trailing: FlatButton
+                  (
+                    child: Icon(Icons.add_alarm),
+                    onPressed: ()
+                    {
+                      
+                    },
+                  ),
+                ),
+                new Text("This app can not replace a medical advice.")
+              ],
+            )
+          )
         );
       }
-    );
+    );  
   }
 }
