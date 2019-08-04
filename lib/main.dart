@@ -118,29 +118,33 @@ class _MyHomePageState extends State<MyHomePage>
             (
                 borderRadius: BorderRadius.circular(10.0),
             ),
-            child: Column
+            child: Padding
             (
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>
-              [
-                const ListTile
-                (
-                  title: Text('How old are you?'),
-                ),
-                ButtonTheme.bar
-                (
-                  child: TextFormField
+              padding: EdgeInsets.all(8.0),
+              child: Column
+              (
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>
+                [
+                  const ListTile
                   (
-                    decoration: const InputDecoration
+                    title: Text('How old are you?'),
+                  ),
+                  ButtonTheme.bar
+                  (
+                    child: TextFormField
                     (
-                      icon: Icon(Icons.hourglass_empty),
-                      hintText: 'Enter your age here'
+                      decoration: const InputDecoration
+                      (
+                        icon: Icon(Icons.hourglass_empty),
+                        hintText: 'Enter your age here'
+                      ),
+                      controller: ageInputController,
+                      keyboardType: TextInputType.number,
                     ),
-                    controller: ageInputController,
-                    keyboardType: TextInputType.number,
-                  )
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
             elevation: 5,
           ),
@@ -199,18 +203,22 @@ class _MyHomePageState extends State<MyHomePage>
                 (
                   title: Text("When do you want to get up?"),
                 ),
-                new DateTimePickerFormField
+                Padding
                 (
-                  inputType: InputType.time,
-                  format: DateFormat("HH:mm"),
-                  initialTime: TimeOfDay.now(),
-                  decoration: InputDecoration
+                  padding: EdgeInsets.all(8.0),
+                  child: new DateTimePickerFormField
                   (
-                    labelText: "Enter time here",
-                    hasFloatingPlaceholder: false,
-                  ),
-                  controller: timeInputController,
-                )
+                    inputType: InputType.time,
+                    format: DateFormat("HH:mm"),
+                    initialTime: TimeOfDay.now(),
+                    decoration: InputDecoration
+                    (
+                      labelText: "Enter time here",
+                      hasFloatingPlaceholder: false,
+                    ),
+                    controller: timeInputController,
+                  )
+                ),
               ],
             ),
             elevation: 5,
