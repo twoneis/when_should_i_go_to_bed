@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'main.dart';
-
 class TopBar extends StatelessWidget implements PreferredSizeWidget 
 {
   ShapeBorder kBackButtonShape = RoundedRectangleBorder

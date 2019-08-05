@@ -12,7 +12,7 @@ class AwesomeBottomNavigationBar extends StatefulWidget {
 
   AwesomeBottomNavigationBar(
       {this.icons = const [],
-      this.bodyBackgroundColor = Colors.pink,
+      this.bodyBackgroundColor,
       this.selectedIndex = 0,
       @required this.tapCallback});
 

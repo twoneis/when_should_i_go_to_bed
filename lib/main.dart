@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter/rendering.dart';
 
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:when_should_i_go_to_bed/AwesomeBottomNav/AwesomeBottomNavigationBar.dart';
  
@@ -25,6 +22,7 @@ class MyApp extends StatelessWidget
       data: (brightness) => new ThemeData
       (
         primarySwatch: Colors.pink,
+        primaryColor: Colors.pink[100],
         brightness: brightness,
       ),
       themedWidgetBuilder: (context, theme) 
@@ -101,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage>
           _pageController.animateToPage(_selectedIndex, duration: const Duration(milliseconds: 300), curve: Curves.ease);
         },
         selectedIndex: _selectedIndex,
+        bodyBackgroundColor: Theme.of(context).primaryColor,
       ),
       body: PageView
       (
