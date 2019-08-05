@@ -221,7 +221,6 @@ class _AwesomeBottomNavigationBarState extends State<AwesomeBottomNavigationBar>
                 height: kBottomNavigationBarHeight * 1.6,
                 width: _size.width,
                 child: Material(
-                  color: Colors.white,
                   elevation: 4,
                   child: Container(
                     margin:
