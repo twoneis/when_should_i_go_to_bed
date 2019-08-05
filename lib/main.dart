@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget
       data: (brightness) => new ThemeData
       (
         primarySwatch: Colors.pink,
-        primaryColor: Colors.pink[100],
+        primaryColor: Colors.pink[200],
         brightness: brightness,
       ),
       themedWidgetBuilder: (context, theme) 

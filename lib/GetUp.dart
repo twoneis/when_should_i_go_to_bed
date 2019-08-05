@@ -273,7 +273,44 @@ class _GetUpState extends State<GetUp>
           child: Text("How long should I sleep?"),
           onPressed: ()
           {
-            _calculateSleepTime(context, _genderValue, ageInputController, timeInputController);
+            if (ageInputController.text.isEmpty == true) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text(
+                          "Looks like you forgot to enter your age. Please enter it and try again."),
+                      actions: <Widget>[
+                        new FlatButton(
+                          child: new Text("Close"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  });
+            } else if (timeInputController.text.isEmpty == true) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Text(
+                        "Looks like you forgot to enter the time. Please enter it and try again."),
+                    actions: <Widget>[
+                      new FlatButton(
+                        child: new Text("Close"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                }
+              );
+            } else {
+              _calculateSleepTime(context, _genderValue, ageInputController, timeInputController);
+            }
           },
           color: Theme.of(context).primaryColor,
           elevation: 5,
