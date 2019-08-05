@@ -15,7 +15,6 @@ class _NormalState extends State<Normal>
 
   //declaring some later needed values
   int _genderValue;
-  int _selectedIndex = 1;
   final TextEditingController ageInputController = new TextEditingController();
   final TextEditingController timeInputController = new TextEditingController();
 

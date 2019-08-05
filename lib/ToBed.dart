@@ -16,7 +16,6 @@ class _GetUpState extends State<ToBed>
 {
     //declaring some later needed values
   int _genderValue;
-  int _selectedIndex = 1;
   final TextEditingController ageInputController = new TextEditingController();
   final TextEditingController timeInputController = new TextEditingController();
 
@@ -29,7 +28,6 @@ class _GetUpState extends State<ToBed>
       _genderValue = value;
     });
   }
-
   
   setGender(int value)
   {
@@ -84,15 +82,15 @@ class _GetUpState extends State<ToBed>
       sleepTime += 1;
     }
     
-    List<String> wakeTime = timeController.text.split(":");
-    int wakeHours = int.parse(wakeTime[0]);
-    int minutes = int.parse(wakeTime[1]);
+    List<String> bedTime = timeController.text.split(":");
+    int bedHours = int.parse(bedTime[0]);
+    int minutes = int.parse(bedTime[1]);
     int dayhours = 24;
-    int hours = wakeHours - sleepTime;
+    int hours = bedHours + sleepTime;
 
-    if (hours < 0)
+    if (hours > 24)
     {
-      hours = dayhours += hours;
+      hours = hours -= dayhours;
     }
 
     showModalBottomSheet
@@ -127,7 +125,7 @@ class _GetUpState extends State<ToBed>
                 new ListTile
                 (
                   leading: new Icon(Icons.alarm),
-                  title: new Text("You should go to bed at " + hours.toString() + ":" + minutes.toString()),
+                  title: new Text("You should get up at " + hours.toString() + ":" + minutes.toString()),
                   trailing: FlatButton
                   (
                     child: Icon(Icons.add_alarm),
@@ -243,7 +241,7 @@ class _GetUpState extends State<ToBed>
             [
               ListTile
               (
-                title: Text("When do you want to get up?"),
+                title: Text("When do you want to go to bed?"),
               ),
               Padding
               (
