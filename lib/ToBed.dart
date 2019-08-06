@@ -142,7 +142,7 @@ class _GetUpState extends State<ToBed> {
               ],
             ),
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         Card(
           shape: RoundedRectangleBorder(
@@ -177,7 +177,7 @@ class _GetUpState extends State<ToBed> {
                   })
             ],
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         Card(
           shape: RoundedRectangleBorder(
@@ -203,7 +203,7 @@ class _GetUpState extends State<ToBed> {
                   )),
             ],
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         RaisedButton(
           shape: RoundedRectangleBorder(
@@ -251,7 +251,7 @@ class _GetUpState extends State<ToBed> {
             }
           },
           color: Theme.of(context).primaryColor,
-          elevation: 5,
+          elevation: 2,
         ),
       ],
     );

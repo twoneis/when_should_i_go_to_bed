@@ -190,7 +190,7 @@ class _GetUpState extends State<GetUp>
               ],
             ),
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         Card
         (
@@ -230,7 +230,7 @@ class _GetUpState extends State<GetUp>
               )
             ],
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         Card
         (
@@ -265,7 +265,7 @@ class _GetUpState extends State<GetUp>
               ),
             ],
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         RaisedButton
         (
@@ -316,7 +316,7 @@ class _GetUpState extends State<GetUp>
             }
           },
           color: Theme.of(context).primaryColor,
-          elevation: 5,
+          elevation: 2,
         ),
       ],
     );

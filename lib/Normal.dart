@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'main.dart';
+
 void main() => runApp(Normal());
 
 class Normal extends StatefulWidget {
@@ -10,6 +12,7 @@ class Normal extends StatefulWidget {
 
 class _NormalState extends State<Normal> {
   //declaring some later needed values
+
   int _genderValue;
   final TextEditingController ageInputController = new TextEditingController();
 
@@ -33,8 +36,7 @@ class _NormalState extends State<Normal> {
     _genderValue = 0;
   }
 
-  void _calculateSleepTime(
-      context, int genderValue, ageController) {
+  void _calculateSleepTime(context, int genderValue, ageController) {
     int sleepTime;
     int age = int.parse(ageController.text);
     if (age <= 1) {
@@ -58,41 +60,42 @@ class _NormalState extends State<Normal> {
     }
 
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return new Container(
-            color: Color(0xFF737373),
-            child: new Container(
-              decoration: new BoxDecoration(
+      context: context,
+      builder: (BuildContext bc) {
+        return new Container(
+          color: Color(0xFF737373),
+          child: new Container(
+            decoration: new BoxDecoration(
                 color: Colors.white,
                 borderRadius: new BorderRadius.only(
-                  topLeft: const Radius.circular(10.0),
-                  topRight: const Radius.circular(10.0)
+                    topLeft: const Radius.circular(10.0),
+                    topRight: const Radius.circular(10.0))),
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new ListTile(
+                  leading: new Icon(Icons.hourglass_full),
+                  title: new Text("You should sleep " +
+                      sleepTime.toInt().toString() +
+                      " hours"),
+                ),
+                new ListTile(
+                  subtitle: new Text(
+                      "This app can not replace a medical advice."),
+                  contentPadding: EdgeInsets.only(left: 100),
                 )
-              ),
-              child: new Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  new ListTile(
-                    leading: new Icon(Icons.hourglass_full),
-                    title: new Text("You should sleep " +
-                        sleepTime.toInt().toString() +
-                        " hours"),
-                  ),
-                  new ListTile (
-                    subtitle: new Text("This app can not replace a medical advice."),
-                    contentPadding: EdgeInsets.only(left: 100),
-                  )
-                ],
-              )
+              ],
             )
-          );
-        }
-      );
+          )
+        );
+      }
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return new ListView(
       padding: const EdgeInsets.all(20.0),
       children: <Widget>[
@@ -120,7 +123,7 @@ class _NormalState extends State<Normal> {
               ],
             ),
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         Card(
           shape: RoundedRectangleBorder(
@@ -155,7 +158,7 @@ class _NormalState extends State<Normal> {
                   })
             ],
           ),
-          elevation: 5,
+          elevation: 2,
         ),
         RaisedButton(
           shape: RoundedRectangleBorder(
@@ -168,24 +171,28 @@ class _NormalState extends State<Normal> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      content: Text("Looks like you forgot to enter your age. Please enter it and try again."),
-                      actions: <Widget>
-                      [
+                      content: Text(
+                          "Looks like you forgot to enter your age. Please enter it and try again."),
+                      actions: <Widget>[
                         new FlatButton(
-                        child: new Text("Close"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
+                          child: new Text("Close"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
                       ],
                     );
                   });
             } else {
-              _calculateSleepTime(context, _genderValue, ageInputController,);
+              _calculateSleepTime(
+                context,
+                _genderValue,
+                ageInputController,
+              );
             }
           },
           color: Theme.of(context).primaryColor,
-          elevation: 5,
+          elevation: 2,
         ),
       ],
     );

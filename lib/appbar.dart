@@ -1,60 +1,53 @@
 import 'package:flutter/material.dart';
 
-class TopBar extends StatelessWidget implements PreferredSizeWidget 
-{
-  ShapeBorder kBackButtonShape = RoundedRectangleBorder
-  (
-  borderRadius: BorderRadius.only
-  (
-    topRight: Radius.circular(30),
-  ),
-);
+class TopBar extends StatelessWidget implements PreferredSizeWidget {
+  ShapeBorder kBackButtonShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      topRight: Radius.circular(30),
+    ),
+  );
 
-Widget kBackBtn = Icon
-(
-  Icons.arrow_back_ios,
-  // color: Colors.black54,
-);
+  Widget kBackBtn = Icon(
+    Icons.arrow_back_ios,
+    // color: Colors.black54,
+  );
 
   final String title;
   final Widget child;
   final Function onPressed;
   final Function onTitleTapped;
+  final double elevation;
 
   @override
   final Size preferredSize;
 
-  TopBar({@required this.title, @required this.child, @required this.onPressed, this.onTitleTapped})
+  TopBar(
+      {@required this.title,
+      @required this.child,
+      @required this.onPressed,
+      this.elevation,
+      this.onTitleTapped})
       : preferredSize = Size.fromHeight(60.0);
 
   @override
-  Widget build(BuildContext context) 
-  {
-    return SafeArea
-    (
-      child: Column
-      (
-        children: <Widget>
-        [
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        children: <Widget>[
           // SizedBox(height: 30,),
-          Row
-          (
+          Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>
-            [
-              Hero
-              (
+            children: <Widget>[
+              Hero(
                 tag: 'topBarBtn',
-                child: Card
-                (
-                  elevation: 5,
+                child: Card(
+                  elevation: elevation,
                   shape: kBackButtonShape,
-                  child: MaterialButton
-                  (
+                  child: MaterialButton(
                     height: 50,
                     minWidth: 50,
-                    elevation: 5,
+                    elevation: elevation,
                     shape: kBackButtonShape,
                     onPressed: onPressed,
                     child: child,
@@ -64,38 +57,28 @@ Widget kBackBtn = Icon
               // SizedBox(
               //   width: 50,
               // ),
-              Hero
-              (
+              Hero(
                 tag: 'title',
                 transitionOnUserGestures: true,
-                child: Card
-                (
-                  elevation: 5,
-                  shape: RoundedRectangleBorder
-                  (
-                    borderRadius: BorderRadius.only
-                    (
+                child: Card(
+                  elevation: elevation,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
                     ),
                   ),
-                  child: InkWell
-                  (
+                  child: InkWell(
                     onTap: onTitleTapped,
-                    child: Container
-                    (
+                    child: Container(
                       width: MediaQuery.of(context).size.width / 1.5,
                       height: 50,
-                      child: Align
-                      (
+                      child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Padding
-                        (
+                        child: Padding(
                           padding: const EdgeInsets.only(left: 30),
-                          child: Text
-                          (
+                          child: Text(
                             title,
-                            style: TextStyle
-                            (
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
                               // color: Colors.black54,
