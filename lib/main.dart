@@ -43,6 +43,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   PageController _pageController;
   int _selectedIndex = 1;
+  Color circleColor;
+  Color iconColor;
+
+  void _getIconColor() {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      iconColor = Colors.white;
+    } else {
+      iconColor = Colors.black;
+    }
+  }
+
+  void _getCircleColor() {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      circleColor = Colors.black38;
+    } else {
+      circleColor = Colors.white;
+    }
+  }
 
   @override
   void initState() {
@@ -58,6 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _getCircleColor();
+    _getIconColor();
     return new Scaffold(
         appBar: TopBar(
           title: "Bed Time",
@@ -73,6 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Icons.hotel,
             Icons.wb_sunny,
           ],
+          iconColor: iconColor,
+          circleColor: circleColor,
           tapCallback: (int index) {
             setState(() {
               _selectedIndex = index;

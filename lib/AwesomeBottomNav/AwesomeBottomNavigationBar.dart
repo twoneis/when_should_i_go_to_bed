@@ -6,6 +6,8 @@ import 'Utils.dart';
 class AwesomeBottomNavigationBar extends StatefulWidget {
   final List<IconData> icons;
   final Color bodyBackgroundColor;
+  final Color circleColor;
+  final Color iconColor;
   final int selectedIndex;
 
   final Function tapCallback;
@@ -13,6 +15,8 @@ class AwesomeBottomNavigationBar extends StatefulWidget {
   AwesomeBottomNavigationBar(
       {this.icons = const [],
       this.bodyBackgroundColor,
+      @required this.circleColor,
+      @required this.iconColor,
       this.selectedIndex = 0,
       @required this.tapCallback});
 
@@ -168,7 +172,7 @@ class _AwesomeBottomNavigationBarState extends State<AwesomeBottomNavigationBar>
     }
     return Icon(
       icon,
-      color: Colors.black,
+      color: widget.iconColor,
     );
   }
 
@@ -195,7 +199,7 @@ class _AwesomeBottomNavigationBarState extends State<AwesomeBottomNavigationBar>
                 child: Material(
                   clipBehavior: Clip.antiAlias,
                   type: MaterialType.circle,
-                  color: Colors.white,
+                  color: widget.circleColor,
                   elevation: 2,
                   child: getMainIcon(),
                 ),
