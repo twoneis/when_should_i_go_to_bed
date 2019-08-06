@@ -125,7 +125,7 @@ class _GetUpState extends State<GetUp>
                 ),
                 new ListTile
                 (
-                  leading: new Icon(Icons.alarm),
+                  leading: new Icon(Icons.notifications_active),
                   title: new Text("You should go to bed at " + hours.toString() + ":" + minutes.toString()),
                   trailing: FlatButton
                   (
