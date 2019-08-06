@@ -136,7 +136,10 @@ class _GetUpState extends State<GetUp>
                     },
                   ),
                 ),
-                new Text("This app can not replace a medical advice.")
+                new ListTile 
+                (
+                  subtitle: new Text("This app can not replace a medical advice."),
+                )
               ],
             )
           )

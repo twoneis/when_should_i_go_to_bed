@@ -72,40 +72,45 @@ class _GetUpState extends State<ToBed> {
     }
 
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return new Container(
-              color: Color(0xFF737373),
-              child: new Container(
-                  decoration: new BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: new BorderRadius.only(
-                          topLeft: const Radius.circular(10.0),
-                          topRight: const Radius.circular(10.0))),
-                  child: new Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      new ListTile(
-                        leading: new Icon(Icons.hourglass_full),
-                        title: new Text("You should sleep " +
-                            sleepTime.toInt().toString() +
-                            " hours"),
-                      ),
-                      new ListTile(
-                        leading: new Icon(Icons.alarm),
-                        title: new Text("You should get up at " +
-                            hours.toString() +
-                            ":" +
-                            minutes.toString()),
-                        trailing: FlatButton(
-                          child: Icon(Icons.add_alarm),
-                          onPressed: () {},
-                        ),
-                      ),
-                      new Text("This app can not replace a medical advice.")
-                    ],
-                  )));
-        });
+      context: context,
+      builder: (BuildContext bc) {
+        return new Container(
+          color: Color(0xFF737373),
+          child: new Container(
+            decoration: new BoxDecoration(
+                color: Colors.white,
+                borderRadius: new BorderRadius.only(
+                    topLeft: const Radius.circular(10.0),
+                    topRight: const Radius.circular(10.0))),
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new ListTile(
+                  leading: new Icon(Icons.hourglass_full),
+                  title: new Text("You should sleep " +
+                      sleepTime.toInt().toString() +
+                      " hours"),
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.alarm),
+                  title: new Text("You should get up at " +
+                      hours.toString() +
+                      ":" +
+                      minutes.toString()),
+                  trailing: FlatButton(
+                    child: Icon(Icons.add_alarm),
+                    onPressed: () {},
+                  ),
+                ),
+                new ListTile (
+                  subtitle: new Text("This app can not replace a medical advice."),
+                )
+              ],
+            )
+          )
+        );
+      }
+    );
   }
 
   @override
